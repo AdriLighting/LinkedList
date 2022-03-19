@@ -23,7 +23,7 @@ struct ListNode
 };
 
 template <typename T>
-class LinkedList{
+class LList{
 
 protected:
 	int _size;
@@ -42,27 +42,27 @@ protected:
 	ListNode<T>* findEndOfSortedString(ListNode<T> *p, int (*cmp)(T &, T &));
 
 public:
-	LinkedList();
-	LinkedList(int sizeIndex, T _t); //initiate list size and default value
-	virtual ~LinkedList();
+	LList();
+	LList(int sizeIndex, T _t); //initiate list size and default value
+	virtual ~LList();
 
 	/*
-		Returns current size of LinkedList
+		Returns current size of LList
 	*/
 	virtual int size();
 	/*
 		Adds a T object in the specified index;
-		Unlink and link the LinkedList correcly;
+		Unlink and link the LList correcly;
 		Increment _size
 	*/
 	virtual bool add(int index, T);
 	/*
-		Adds a T object in the end of the LinkedList;
+		Adds a T object in the end of the LList;
 		Increment _size;
 	*/
 	virtual bool add(T);
 	/*
-		Adds a T object in the start of the LinkedList;
+		Adds a T object in the start of the LList;
 		Increment _size;
 	*/
 	virtual bool unshift(T);
@@ -108,9 +108,9 @@ public:
 
 };
 
-// Initialize LinkedList with false values
+// Initialize LList with false values
 template<typename T>
-LinkedList<T>::LinkedList()
+LList<T>::LList()
 {
 	root=NULL;
 	last=NULL;
@@ -123,7 +123,7 @@ LinkedList<T>::LinkedList()
 
 // Clear Nodes and free Memory
 template<typename T>
-LinkedList<T>::~LinkedList()
+LList<T>::~LList()
 {
 	ListNode<T>* tmp;
 	while(root!=NULL)
@@ -142,7 +142,7 @@ LinkedList<T>::~LinkedList()
 */
 
 template<typename T>
-ListNode<T>* LinkedList<T>::getNode(int index){
+ListNode<T>* LList<T>::getNode(int index){
 
 	int _pos = 0;
 	ListNode<T>* current = root;
@@ -173,19 +173,19 @@ ListNode<T>* LinkedList<T>::getNode(int index){
 }
 
 template<typename T>
-int LinkedList<T>::size(){
+int LList<T>::size(){
 	return _size;
 }
 
 template<typename T>
-LinkedList<T>::LinkedList(int sizeIndex, T _t){
+LList<T>::LList(int sizeIndex, T _t){
 	for (int i = 0; i < sizeIndex; i++){
 		add(_t);
 	}
 }
 
 template<typename T>
-bool LinkedList<T>::add(int index, T _t){
+bool LList<T>::add(int index, T _t){
 
 	if(index >= _size)
 		return add(_t);
@@ -206,7 +206,7 @@ bool LinkedList<T>::add(int index, T _t){
 }
 
 template<typename T>
-bool LinkedList<T>::add(T _t){
+bool LList<T>::add(T _t){
 
 	ListNode<T> *tmp = new ListNode<T>();
 	tmp->data = _t;
@@ -229,7 +229,7 @@ bool LinkedList<T>::add(T _t){
 }
 
 template<typename T>
-bool LinkedList<T>::unshift(T _t){
+bool LList<T>::unshift(T _t){
 
 	if(_size == 0)
 		return add(_t);
@@ -247,12 +247,12 @@ bool LinkedList<T>::unshift(T _t){
 
 
 template<typename T>
-T& LinkedList<T>::operator[](int index) {
+T& LList<T>::operator[](int index) {
 	return getNode(index)->data;
 }
 
 template<typename T>
-bool LinkedList<T>::set(int index, T _t){
+bool LList<T>::set(int index, T _t){
 	// Check if index position is in bounds
 	if(index < 0 || index >= _size)
 		return false;
@@ -262,7 +262,7 @@ bool LinkedList<T>::set(int index, T _t){
 }
 
 template<typename T>
-T LinkedList<T>::pop(){
+T LList<T>::pop(){
 	if(_size <= 0)
 		return T();
 	
@@ -288,7 +288,7 @@ T LinkedList<T>::pop(){
 }
 
 template<typename T>
-T LinkedList<T>::shift(){
+T LList<T>::shift(){
 	if(_size <= 0)
 		return T();
 
@@ -309,7 +309,7 @@ T LinkedList<T>::shift(){
 }
 
 template<typename T>
-T LinkedList<T>::remove(int index){
+T LList<T>::remove(int index){
 	if (index < 0 || index >= _size)
 	{
 		return T();
@@ -335,20 +335,20 @@ T LinkedList<T>::remove(int index){
 
 
 template<typename T>
-T LinkedList<T>::get(int index){
+T LList<T>::get(int index){
 	ListNode<T> *tmp = getNode(index);
 
 	return (tmp ? tmp->data : T());
 }
 
 template<typename T>
-void LinkedList<T>::clear(){
+void LList<T>::clear(){
 	while(size() > 0)
 		shift();
 }
 
 template<typename T>
-void LinkedList<T>::sort(int (*cmp)(T &, T &)){
+void LList<T>::sort(int (*cmp)(T &, T &)){
 	if(_size < 2) return; // trivial case;
 
 	for(;;) {	
@@ -408,7 +408,7 @@ void LinkedList<T>::sort(int (*cmp)(T &, T &)){
 }
 
 template<typename T>
-ListNode<T>* LinkedList<T>::findEndOfSortedString(ListNode<T> *p, int (*cmp)(T &, T &)) {
+ListNode<T>* LList<T>::findEndOfSortedString(ListNode<T> *p, int (*cmp)(T &, T &)) {
 	while(p->next && cmp(p->data, p->next->data) <= 0) {
 		p = p->next;
 	}
